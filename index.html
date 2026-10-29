@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account &amp; Personal Data — Master Hisaab</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #ecfdf5;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --text-main: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding: 24px 16px;
+        }
+
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #059669 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 36px 28px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.4px;
+        }
+
+        header p {
+            font-size: 15px;
+            opacity: 0.92;
+        }
+
+        .meta-bar {
+            background: #f1f5f9;
+            padding: 12px 28px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        main {
+            padding: 32px 28px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 30px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--text-body);
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin: 10px 0 18px 24px;
+            color: var(--text-body);
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0 24px 0;
+        }
+
+        .method-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            background: #f8fafc;
+        }
+
+        .method-card.recommended {
+            border-color: #a7f3d0;
+            background: var(--primary-light);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .badge.secondary {
+            background: #334155;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px 0;
+            font-size: 14px;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .data-table th {
+            background: #f1f5f9;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .form-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            margin-top: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 14px;
+            font-size: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #ffffff;
+            color: var(--text-main);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-row label {
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.15s ease;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1px solid #cbd5e1;
+        }
+
+        .btn:hover {
+            opacity: 0.92;
+        }
+
+        .status-box {
+            display: none;
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-box.error {
+            display: block;
+            background: var(--danger-light);
+            border-left: 4px solid var(--danger);
+            color: #991b1b;
+        }
+
+        .status-box.info {
+            display: block;
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            color: #065f46;
+        }
+
+        footer {
+            background: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            padding: 20px 28px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 12px 8px;
+            }
+            header, main, .meta-bar, footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Master Hisaab (ماسٹر حساب)</h1>
+        <p>Account &amp; Personal Data Deletion Policy and Request Portal</p>
+    </header>
+
+    <div class="meta-bar">
+        <span><strong>Application:</strong> Master Hisaab</span>
+        <span><strong>Developer:</strong> Akhonzada Inam (Akhonzada GSM)</span>
+        <span><strong>Official Support:</strong> akhonzadagsm@gmail.com</span>
+    </div>
+
+    <main>
+        <h2>1. How to Delete Your Master Hisaab Account</h2>
+        <p>
+            Users of <strong>Master Hisaab</strong> can delete their account and associated data at any time using either of the two official methods below. You do not need to keep the app installed to request account or cloud data deletion.
+        </p>
+
+        <div class="method-grid">
+            <div class="method-card recommended">
+                <span class="badge">Method 1 — Instant In-App Deletion</span>
+                <h3>Delete Directly Inside Master Hisaab</h3>
+                <ol>
+                    <li>Open the <strong>Master Hisaab</strong> app and sign in with your Google account.</li>
+                    <li>Go to the <strong>Settings (ترتیبات)</strong> tab.</li>
+                    <li>Scroll down and tap <strong>Delete Account (اکاؤنٹ حذف کریں)</strong>.</li>
+                    <li>Review the data summary, check the confirmation box, type <code>DELETE</code> (and enter your Security PIN if enabled), then tap <strong>Delete Permanently</strong>.</li>
+                </ol>
+                <p style="font-size: 13.5px; margin-bottom: 0;">
+                    Your Cloud Firestore records and local device records for that account are deleted and verified immediately.
+                </p>
+            </div>
+
+            <div class="method-card">
+                <span class="badge secondary">Method 2 — Web / Email Request (No App Required)</span>
+                <h3>Request Deletion Without the App</h3>
+                <ol>
+                    <li>Use the <strong>Deletion Request Generator</strong> below on this page, or send an email directly from your registered Google email address to <strong><a href="mailto:akhonzadagsm@gmail.com">akhonzadagsm@gmail.com</a></strong>.</li>
+                    <li>Include the subject line: <code>Delete My Master Hisaab Account</code>.</li>
+                    <li>Specify whether you want <strong>Full Account &amp; Cloud Data Deletion</strong> or <strong>Partial Data Deletion</strong>.</li>
+                </ol>
+                <p style="font-size: 13.5px; margin-bottom: 0;">
+                    Verified email requests are processed within <strong>7 business days</strong>.
+                </p>
+            </div>
+        </div>
+
+        <h2>2. Data Deleted vs. Data Retained</h2>
+        <p>
+            The table below details exactly which categories of data are permanently deleted and how user-owned local or Google Drive files are handled:
+        </p>
+
+        <table class="data-table" aria-label="Data Deletion and Retention Breakdown">
+            <thead>
+                <tr>
+                    <th>Data Category</th>
+                    <th>Storage Location</th>
+                    <th>Deletion Action &amp; Retention Policy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Account Profile &amp; Authentication</strong><br>(Google UID mapping, email, shop name, owner name, phone number, business address)</td>
+                    <td>Firebase Authentication &amp; Cloud Firestore (<code>/users/{uid}</code>)</td>
+                    <td><strong>Permanently Deleted.</strong> Deleted immediately when using In-App Account Deletion, or within 7 business days for email requests. Zero residual retention.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cloud Bookkeeping &amp; Ledger Records</strong><br>(Customers, shopkeepers/suppliers, bank &amp; wallet accounts, transactions, daily cash closings, profit transfers)</td>
+                    <td>Cloud Firestore Subcollections under <code>/users/{uid}/...</code></td>
+                    <td><strong>Permanently Deleted.</strong> All subcollection documents owned by your Google UID are permanently removed. Other users' records are never affected.</td>
+                </tr>
+                <tr>
+                    <td><strong>Local Device Database &amp; PIN Hash</strong><br>(Room SQLite database rows &amp; salted SHA-256 PIN hash)</td>
+                    <td>Local Android Device Storage</td>
+                    <td><strong>Permanently Deleted</strong> for your account during In-App Account Deletion, or immediately when you uninstall the app or clear app storage in Android Settings.</td>
+                </tr>
+                <tr>
+                    <td><strong>Personal Google Drive Backups</strong><br>(Optional user-created backup files)</td>
+                    <td>Your Personal Google Drive (<code>drive.file</code> scope)</td>
+                    <td><strong>User-Controlled.</strong> Backup files saved in your own Google Drive belong exclusively to your Google account; our servers have no background access to your Google Drive. You can delete them directly from your Google Drive app at any time.</td>
+                </tr>
+                <tr>
+                    <td><strong>Legal / Security Compliance Logs</strong></td>
+                    <td>Support Email Correspondence</td>
+                    <td>If you submit an email deletion request to <code>akhonzadagsm@gmail.com</code>, the deletion confirmation email thread is retained only as necessary to demonstrate compliance with data protection regulations and prevent unauthorized account tampering. No bookkeeping or ledger data is retained.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Verification &amp; Processing Procedure</h2>
+        <ul>
+            <li><strong>Ownership Verification:</strong> To protect shopkeepers from unauthorized third-party deletion of their financial records, we verify that the deletion request originates from the exact <strong>Google Account Email Address</strong> registered with Master Hisaab.</li>
+            <li><strong>In-App Verification:</strong> In-app deletion verifies your active Google Sign-In session (<code>request.auth.uid == userId</code>), requires explicit checkbox and keyword confirmation (<code>DELETE</code>), and checks your Security PIN if configured.</li>
+            <li><strong>Email Verification:</strong> When submitting a deletion request via email, send the email directly from your registered Google account address. If sent from a different address, we will send a single verification reply to the registered Google email before purging the account.</li>
+            <li><strong>Processing Timeline:</strong> In-app deletions complete immediately once online verification succeeds. Email deletion requests are verified and permanently completed within <strong>7 business days</strong>, followed by a final confirmation reply.</li>
+        </ul>
+
+        <h2>4. Submit an Account or Data Deletion Request</h2>
+        <p>
+            Complete the form below to prepare a verified deletion request email in your default email app, or copy the formatted request to send manually to <strong>akhonzadagsm@gmail.com</strong>.
+        </p>
+
+        <div class="form-card">
+            <form id="deletionForm" novalidate>
+                <div class="form-group">
+                    <label for="googleEmail">Registered Google Account Email Address *</label>
+                    <input type="email" id="googleEmail" name="googleEmail" placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="shopName">Shop / Business Name or Registered Mobile Number (Optional)</label>
+                    <input type="text" id="shopName" name="shopName" placeholder="e.g. Al-Madina Communication / 03001234567">
+                </div>
+
+                <div class="form-group">
+                    <label for="deletionScope">Request Type *</label>
+                    <select id="deletionScope" name="deletionScope">
+                        <option value="FULL_ACCOUNT_AND_DATA">Delete My Entire Account &amp; All Cloud Data</option>
+                        <option value="CLOUD_DATA_ONLY">Delete Specific / All Cloud Synced Data Only (Keep Account)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalNotes">Additional Details (Optional)</label>
+                    <textarea id="additionalNotes" name="additionalNotes" rows="3" placeholder="Specify any details if requesting partial data deletion..."></textarea>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="confirmCheck" name="confirmCheck" required>
+                    <label for="confirmCheck">
+                        I confirm that I am the owner of this Master Hisaab Google account and I understand that deleted cloud records cannot be recovered. *
+                    </label>
+                </div>
+
+                <div class="btn-row">
+                    <button type="submit" class="btn btn-danger" id="submitEmailBtn">
+                        Open Email App to Send Deletion Request
+                    </button>
+                    <button type="button" class="btn btn-outline" id="copyRequestBtn">
+                        Copy Request Details for Manual Email
+                    </button>
+                </div>
+
+                <div id="statusMessage" class="status-box" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Master Hisaab • Developed by Akhonzada Inam (Akhonzada GSM) • Support: <a href="mailto:akhonzadagsm@gmail.com" style="color: #059669;">akhonzadagsm@gmail.com</a>
+    </footer>
+</div>
+
+<script>
+    (function () {
+        var SUPPORT_EMAIL = "akhonzadagsm@gmail.com";
+        var form = document.getElementById("deletionForm");
+        var emailInput = document.getElementById("googleEmail");
+        var shopInput = document.getElementById("shopName");
+        var scopeSelect = document.getElementById("deletionScope");
+        var notesInput = document.getElementById("additionalNotes");
+        var confirmCheck = document.getElementById("confirmCheck");
+        var copyBtn = document.getElementById("copyRequestBtn");
+        var statusBox = document.getElementById("statusMessage");
+
+        function showStatus(text, isError) {
+            statusBox.className = "status-box " + (isError ? "error" : "info");
+            statusBox.textContent = text;
+        }
+
+        function buildRequestPayload() {
+            var email = (emailInput.value || "").trim();
+            var shop = (shopInput.value || "").trim();
+            var scope = scopeSelect.value;
+            var notes = (notesInput.value || "").trim();
+
+            if (!email || email.indexOf("@") === -1) {
+                showStatus("Please enter your valid registered Google Account email address.", true);
+                return null;
+            }
+            if (!confirmCheck.checked) {
+                showStatus("Please check the confirmation box to verify that you want to delete your account/data.", true);
+                return null;
+            }
+
+            var scopeLabel = scope === "FULL_ACCOUNT_AND_DATA"
+                ? "Full Account & All Associated Cloud Data Deletion"
+                : "Partial / Cloud Synced Data Deletion (Without Deleting Account)";
+
+            var subject = scope === "FULL_ACCOUNT_AND_DATA"
+                ? "Delete My Master Hisaab Account"
+                : "Delete My Master Hisaab Data";
+
+            var bodyLines = [
+                "Application: Master Hisaab",
+                "Developer: Akhonzada Inam",
+                "Request Type: " + scopeLabel,
+                "Registered Google Email: " + email,
+                "Shop Name / Phone Number: " + (shop || "Not provided"),
+                "Additional Notes: " + (notes || "None"),
+                "",
+                "Confirmation: I confirm that I am the owner of the Google account listed above and request permanent deletion of the specified Master Hisaab records."
+            ];
+
+            return {
+                subject: subject,
+                body: bodyLines.join("\n")
+            };
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var payload = buildRequestPayload();
+            if (!payload) return;
+
+            var mailtoUrl = "mailto:" + SUPPORT_EMAIL
+                + "?subject=" + encodeURIComponent(payload.subject)
+                + "&body=" + encodeURIComponent(payload.body);
+
+            showStatus(
+                "Opening your email client addressed to " + SUPPORT_EMAIL + ". Please press Send in your email app from your registered Google account to complete the request.",
+                false
+            );
+            window.location.href = mailtoUrl;
+        });
+
+        copyBtn.addEventListener("click", function () {
+            var payload = buildRequestPayload();
+            if (!payload) return;
+
+            var fullText = "To: " + SUPPORT_EMAIL + "\nSubject: " + payload.subject + "\n\n" + payload.body;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(fullText).then(function () {
+                    showStatus(
+                        "Request details copied to clipboard! Send an email from your registered Google account to " + SUPPORT_EMAIL + " and paste the copied text.",
+                        false
+                    );
+                }).catch(function () {
+                    showStatus(
+                        "Please email " + SUPPORT_EMAIL + " with subject '" + payload.subject + "'.",
+                        false
+                    );
+                });
+            } else {
+                showStatus(
+                    "Please email " + SUPPORT_EMAIL + " with subject '" + payload.subject + "'.",
+                    false
+                );
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>
